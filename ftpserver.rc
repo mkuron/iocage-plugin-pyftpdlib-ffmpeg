@@ -5,7 +5,22 @@
 name=ftpserver
 rcvar=ftpserver_enable
 
-command="/scripts/${name}"
+ftpserver_user=nobody
+
+pidfile=/var/run/${name}.pid
+standalone="/scripts/${name}.py"
+ftpserver_flags="/data"
 
 load_rc_config $name
+
+ftpserver_start() {
+	touch ${pidfile}
+	chown ${viewvc_user} ${pidfile}
+	/usr/sbin/daemon -cf -p ${pidfile} -u ${ftpserver_user} ${standalone} ${ftpserver_flags}
+}
+
+ftpserver_cleanup() {
+	[ -f ${pidfile} ] && rm ${pidfile}
+}
+
 run_rc_command "$1"
