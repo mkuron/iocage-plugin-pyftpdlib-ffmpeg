@@ -10,8 +10,11 @@ cd iso-639-0.4.5
 python3 setup.py install
 cd ..
 
-cp ftpserver.rc /etc/rc.d/ftpserver
+curl -Lo /etc/rc.d/ftpserver https://github.com/mkuron/iocage-plugin-pyftpdlib-ffmpeg/raw/master/ftpserver.rc
 chmod +x /etc/rc.d/ftpserver
+
+mkdir /scripts
+mkdir /data
 
 sysrc -f /etc/rc.conf cron_enable="NO"
 sysrc -f /etc/rc.conf ftpserver_enable="YES"
