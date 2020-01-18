@@ -4,8 +4,8 @@
   "artifact": "https://github.com/mkuron/iocage-plugin-pyftpdlib-ffmpeg.git",
   "pkgs": [
     "ffmpeg",
-    "py-pyftpdlib",
-    "py-pip"
+    "python36",
+    "py36-setuptools"
   ],
   "packagesite": "http://pkg.cdn.trueos.org/iocage/unstable",
   "fingerprints": {
