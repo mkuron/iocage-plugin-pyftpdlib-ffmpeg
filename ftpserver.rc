@@ -4,21 +4,21 @@
 
 name=ftpserver
 rcvar=ftpserver_enable
+load_rc_config $name
 
+ftpserver_flags="/data"
 ftpserver_user=nobody
 
 pidfile=/var/run/${name}.pid
+command=python3
 standalone="/scripts/${name}.py"
-ftpserver_flags="/data"
-
-load_rc_config $name
 
 start_cmd=ftpserver_start
 stop_postcmd=ftpserver_cleanup
 
 ftpserver_start() {
 	touch ${pidfile}
-	chown ${viewvc_user} ${pidfile}
+	chown ${ftpserver_user} ${pidfile}
 	/usr/sbin/daemon -cf -p ${pidfile} -u ${ftpserver_user} ${standalone} ${ftpserver_flags}
 }
 
