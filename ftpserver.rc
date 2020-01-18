@@ -13,6 +13,9 @@ ftpserver_flags="/data"
 
 load_rc_config $name
 
+start_cmd=ftpserver_start
+stop_postcmd=ftpserver_cleanup
+
 ftpserver_start() {
 	touch ${pidfile}
 	chown ${viewvc_user} ${pidfile}
