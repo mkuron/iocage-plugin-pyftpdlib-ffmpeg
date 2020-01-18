@@ -7,12 +7,17 @@ import socket
 import threading
 
 
-def register(name, regtype, port, host=None):
+def register(name, regtype, port, host=None, txt=None):
+    if txt:
+        txt = pybonjour.TXTRecord(txt)
+    else:
+        txt = ''
     sdRef = pybonjour.DNSServiceRegister(name=name,
                                          interfaceIndex=0,
                                          regtype=regtype,
                                          port=port,
                                          host=host,
+                                         txtRecord=txt,
                                          callBack=None)
     try:
         try:
@@ -59,7 +64,7 @@ def main():
     ip = '192.168.200.23'
     
     t = threading.Thread(target=register,
-                         args=(name, '_ftp._tcp.', port, host))
+                         args=(name, '_ftp._tcp.', port, host, {'u': 'anonymous', 'p': ''}))
     t.daemon = False
     t.start()
     t = threading.Thread(target=registerHost,
