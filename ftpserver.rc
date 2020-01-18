@@ -2,7 +2,7 @@
 
 . /etc/rc.subr
 
-name=ftpserver.py
+name=ftpserver
 rcvar=ftpserver_enable
 
 command="/scripts/${name}"
