@@ -8,6 +8,7 @@ load_rc_config $name
 
 ftpserver_flags="/data"
 ftpserver_user=nobody
+ftpserver_log=/var/log/${name}.log
 
 pidfile=/var/run/${name}.pid
 command=python3
@@ -17,9 +18,9 @@ start_cmd=ftpserver_start
 stop_postcmd=ftpserver_cleanup
 
 ftpserver_start() {
-	touch ${pidfile}
-	chown ${ftpserver_user} ${pidfile}
-	/usr/sbin/daemon -cf -p ${pidfile} -u ${ftpserver_user} ${standalone} ${ftpserver_flags}
+	touch ${pidfile} ${ftpserver_log}
+	chown ${ftpserver_user} ${pidfile} ${ftpserver_log}
+	/usr/sbin/daemon -cf -p ${pidfile} -u ${ftpserver_user} -o ${ftpserver_log} ${standalone} ${ftpserver_flags}
 }
 
 ftpserver_cleanup() {
