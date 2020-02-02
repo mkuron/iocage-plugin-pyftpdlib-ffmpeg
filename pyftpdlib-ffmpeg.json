@@ -5,6 +5,7 @@
   "pkgs": [
     "ffmpeg",
     "python3",
+    "py36-requests",
     "py36-setuptools",
     "curl"
   ],
